@@ -1,7 +1,68 @@
 <ion-header>
 	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-menu-button></ion-menu-button>
+		</ion-buttons>
 		<ion-title>view-sales</ion-title>
 	</ion-toolbar>
 </ion-header>
 
-<ion-content> </ion-content>
+<ion-content>
+	<ion-segment [(ngModel)]="viewType">
+		<ion-segment-button value="all">
+			<ion-label>All</ion-label>
+		</ion-segment-button>
+		<ion-segment-button value="delivery">
+			<ion-label>Delivery</ion-label>
+		</ion-segment-button>
+		<ion-segment-button value="table">
+			<ion-label>Table</ion-label>
+		</ion-segment-button>
+	</ion-segment>
+
+	<ion-list>
+		<ng-container *ngFor="let sale of salesList">
+			<ion-item *ngIf="sale.saleType === viewType || viewType === 'all'">
+				<ion-label>
+					<ion-row>
+						<ion-col class="vertical-text" *ngIf="sale.saleType === 'delivery'">
+							<b>Delivery #{{sale.invoiceNumber}}</b>
+						</ion-col>
+						<ion-col class="vertical-text" *ngIf="sale.saleType === 'table'">
+							<b>Table {{sale.tableNumber}} #{{sale.invoiceNumber}}</b>
+						</ion-col>
+						<ion-button type="button" (click)="handleEditButton()" class="edit-icon" fill="clear" color="light">
+							<ion-icon name="ellipsis-vertical"></ion-icon>
+						</ion-button>
+					</ion-row>
+					<ion-row>
+						<ion-col>
+							<b>Server: </b>{{sale.serverName}}
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col *ngIf="sale.saleType === 'delivery'">
+							<b>Order mobile: </b>{{sale.mobile}}
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col>
+							<b>Order total: </b>R{{sale.orderTotal}}
+						</ion-col>
+						<ion-col>
+							<b>Payment total: </b>R{{sale.paymentTotal}}
+						</ion-col>
+						<ion-col *ngIf="sale.saleType === 'delivery'">
+							<b>Delivery fee: </b>{{sale.deliveryFee}}
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col>
+							<b>Payment method: </b>{{sale.paymentMethod}}
+						</ion-col>
+					</ion-row>
+				</ion-label>
+			</ion-item>
+		</ng-container>
+	</ion-list>
+</ion-content>
