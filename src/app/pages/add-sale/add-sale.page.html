@@ -1,0 +1,68 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-menu-button></ion-menu-button>
+		</ion-buttons>
+		<ion-title>Add Sale</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-segment [(ngModel)]="formType" (ionChange)="clearForm()">
+		<ion-segment-button value="delivery">
+			<ion-label>Delivery</ion-label>
+		</ion-segment-button>
+		<ion-segment-button value="table">
+			<ion-label>Table</ion-label>
+		</ion-segment-button>
+	</ion-segment>
+
+	<form [formGroup]="saleForm" (ngSubmit)="submitForm()">
+		<ion-item lines="full">
+			<ion-label position="stacked">Invoice Number</ion-label>
+			<ion-input id="invoice" type="number" inputmode="numeric" formControlName="invoiceNumber"></ion-input>
+		</ion-item>
+		<ion-item *ngIf="formType === 'table'" lines="full">
+			<ion-label position="stacked">Table Number</ion-label>
+			<ion-input type="number" inputmode="numeric" formControlName="tableNumber"></ion-input>
+		</ion-item>
+		<ion-item *ngIf="formType === 'delivery'" lines="full">
+			<ion-label position="stacked">Mobile Number</ion-label>
+			<ion-input type="text" inputmode="tel" formControlName="mobile"></ion-input>
+		</ion-item>
+		<ion-item lines="full">
+			<ion-label position="stacked">Order Total</ion-label>
+			<ion-input id="money" type="number" inputmode="decimal" formControlName="orderTotal"></ion-input>
+		</ion-item>
+		<ion-item lines="full">
+			<ion-label position="stacked">Payment Method</ion-label>
+			<ion-select formControlName="paymentMethod">
+				<ion-select-option *ngFor="let payment of paymentMethods" value="{{payment.value}}">{{ payment.label }}</ion-select-option>
+			</ion-select>
+		</ion-item>
+		<ion-item lines="full">
+			<ion-label position="stacked">Payment Total</ion-label>
+			<ion-input id="money" type="number" inputmode="decimal" formControlName="paymentTotal"></ion-input>
+		</ion-item>
+		<ion-item *ngIf="formType === 'delivery'" lines="full">
+			<ion-label position="stacked">Delivery Fee</ion-label>
+			<ion-input id="money" type="number" inputmode="decimal" formControlName="deliveryFee"></ion-input>
+		</ion-item>
+		<ion-item lines="full">
+			<ion-label position="stacked">Server</ion-label>
+			<ion-select formControlName="serverName">
+				<ion-select-option *ngFor="let server of servers" value="{{server}}">{{ server }}</ion-select-option>
+			</ion-select>
+		</ion-item>
+		<ion-row>
+			<ion-col>
+				<ion-button type="submit" expand="block" [disabled]="!saleForm.valid">Submit</ion-button>
+			</ion-col>
+		</ion-row>
+	</form>
+</ion-content>
+
+<!-- <pre>{{ saleForm.value | json }}</pre>
+<pre>{{ saleForm.pristine | json }}</pre>
+<pre>{{ saleForm.errors | json }}</pre>
+<pre>{{ saleForm.valid | json }}</pre> -->
