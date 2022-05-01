@@ -1,7 +1,88 @@
 <ion-header>
 	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-menu-button></ion-menu-button>
+		</ion-buttons>
 		<ion-title>sales-summary</ion-title>
 	</ion-toolbar>
 </ion-header>
 
-<ion-content> </ion-content>
+<ion-content>
+	<ion-grid>
+		<ion-row>
+			<h1>Daily Summary</h1>
+		</ion-row>
+		<ion-row>
+			<ion-col># Orders</ion-col>
+			<ion-col></ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col>Total EFT</ion-col>
+			<ion-col>R</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col>Total Cash</ion-col>
+			<ion-col>R</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col>Total Credit Card</ion-col>
+			<ion-col>R</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col>Final Total</ion-col>
+			<ion-col>R</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col>Total Delivery Fees</ion-col>
+			<ion-col>R</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col>Total Tips</ion-col>
+			<ion-col>R</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col># Servers</ion-col>
+			<ion-col></ion-col>
+		</ion-row>
+	</ion-grid>
+
+	<ion-list inset="true">
+		<ion-accordion-group>
+			<ion-accordion value="server">
+				<ion-item slot="header">
+					<ion-label>Carly</ion-label>
+				</ion-item>
+
+				<ion-list slot="content">
+					<ion-grid>
+						<ion-row>
+							<ion-col># Orders</ion-col>
+							<ion-col></ion-col>
+						</ion-row>
+						<ion-row>
+							<ion-col>Order Total</ion-col>
+							<ion-col>R</ion-col>
+						</ion-row>
+						<ion-row>
+							<ion-col>Commision</ion-col>
+							<ion-col>R</ion-col>
+						</ion-row>
+						<ion-row>
+							<ion-col>Delivery Fee Total</ion-col>
+							<ion-col>R</ion-col>
+						</ion-row>
+						<ion-row>
+							<ion-col>Tips</ion-col>
+							<ion-col>R</ion-col>
+						</ion-row>
+						<ion-row>
+							<ion-col>Final Total</ion-col>
+							<ion-col>R</ion-col>
+						</ion-row>
+					</ion-grid>
+				</ion-list>
+			</ion-accordion>
+		</ion-accordion-group>
+	</ion-list>
+
+</ion-content>
