@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController, ModalController } from '@ionic/angular';
+import { EditSaleComponent } from 'src/app/shared/modal/edit-sale/edit-sale.component';
 
 @Component({
 	selector: 'app-view-sales',
@@ -65,11 +66,26 @@ export class ViewSalesPage implements OnInit {
 		}
 	];
 
-	constructor(public actionSheetController: ActionSheetController) {
+	modal: HTMLElement;
+
+	constructor(public actionSheetController: ActionSheetController, public modalController: ModalController) {
 		this.viewType = 'all';
 	}
 
 	ngOnInit() { }
+
+	async presentModal() {
+		const modal = await this.modalController.create({
+			component: EditSaleComponent,
+			componentProps: {
+				sale: this.salesList[0]
+			}
+		});
+		await modal.present();
+
+		const { data } = await modal.onWillDismiss();
+		console.log('onWillDismiss resolved with data', data);
+	}
 
 	async handleEditButton() {
 		const actionSheet = await this.actionSheetController.create({
