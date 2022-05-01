@@ -82,9 +82,6 @@ export class ViewSalesPage implements OnInit {
 			}
 		});
 		await modal.present();
-
-		const { data } = await modal.onWillDismiss();
-		console.log('onWillDismiss resolved with data', data);
 	}
 
 	async handleEditButton() {
@@ -105,6 +102,7 @@ export class ViewSalesPage implements OnInit {
 					data: this.salesList[0],
 					handler: () => {
 						console.log('Edit clicked');
+						this.presentModal();
 					}
 				},
 				{
