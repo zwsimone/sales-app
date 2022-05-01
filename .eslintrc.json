@@ -12,7 +12,8 @@
 				"plugin:@angular-eslint/ng-cli-compat",
 				"plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
 				"plugin:@angular-eslint/template/process-inline-templates",
-				"eslint:recommended"
+				"eslint:recommended",
+				"prettier"
 			],
 			"rules": {
 				"@angular-eslint/component-class-suffix": [
