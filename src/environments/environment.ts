@@ -4,6 +4,14 @@
 
 export const environment = {
 	production: false,
+	firebase: {
+		apiKey: "AIzaSyDOioaeHQpEUi8qzzp9d-9JNSoxjpuWkko",
+		authDomain: "wok-sales.firebaseapp.com",
+		projectId: "wok-sales",
+		storageBucket: "wok-sales.appspot.com",
+		messagingSenderId: "339835310583",
+		appId: "1:339835310583:web:d6c13c1f6e335939f91ef2"
+	}
 };
 
 /*

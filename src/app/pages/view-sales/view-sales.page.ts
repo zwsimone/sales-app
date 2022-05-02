@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActionSheetController, ModalController } from '@ionic/angular';
+import { DataService } from 'src/app/service/data.service';
 import { EditSaleComponent } from 'src/app/shared/modal/edit-sale/edit-sale.component';
 
 @Component({
@@ -68,8 +69,11 @@ export class ViewSalesPage implements OnInit {
 
 	modal: HTMLElement;
 
-	constructor(public actionSheetController: ActionSheetController, public modalController: ModalController) {
+	constructor(private dataService: DataService, public actionSheetController: ActionSheetController, public modalController: ModalController) {
 		this.viewType = 'all';
+		this.dataService.getSales().subscribe(data => {
+			console.log(data);
+		})
 	}
 
 	ngOnInit() { }
@@ -123,6 +127,7 @@ export class ViewSalesPage implements OnInit {
 }
 
 export interface Sale {
+	id?: string;
 	saleType: string;
 	saleDate: Date;
 	invoiceNumber: number;
