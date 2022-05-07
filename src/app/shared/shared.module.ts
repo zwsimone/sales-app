@@ -1,12 +1,13 @@
-import { CommonModule } from "@angular/common";
-import { NgModule } from "@angular/core";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { IonicModule } from "@ionic/angular";
-import { EditSaleComponent } from "./modal/edit-sale/edit-sale.component";
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { IonicModule } from '@ionic/angular';
+
+import { SaleModalComponent } from './modal/sale-modal/sale-modal.component';
 
 @NgModule({
     declarations: [
-        EditSaleComponent
+        SaleModalComponent
     ],
     imports: [
         ReactiveFormsModule,
@@ -15,7 +16,7 @@ import { EditSaleComponent } from "./modal/edit-sale/edit-sale.component";
         CommonModule
     ],
     exports: [
-        EditSaleComponent
+        SaleModalComponent
     ],
     providers: []
 })

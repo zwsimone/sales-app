@@ -4,20 +4,13 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
 	{
 		path: '',
-		redirectTo: 'add-sale',
+		redirectTo: 'view-sales',
 		pathMatch: 'full',
 	},
 	{
 		path: 'folder/:id',
 		loadChildren: () =>
 			import('./folder/folder.module').then((m) => m.FolderPageModule),
-	},
-	{
-		path: 'add-sale',
-		loadChildren: () =>
-			import('./pages/add-sale/add-sale.module').then(
-				(m) => m.AddSalePageModule
-			),
 	},
 	{
 		path: 'view-sales',
@@ -40,10 +33,10 @@ const routes: Routes = [
 				(m) => m.SalesHistoryPageModule
 			),
 	},
-  {
-    path: 'settings',
-    loadChildren: () => import('./pages/settings/settings.module').then( m => m.SettingsPageModule)
-  },
+	{
+		path: 'settings',
+		loadChildren: () => import('./pages/settings/settings.module').then(m => m.SettingsPageModule)
+	},
 ];
 
 @NgModule({
@@ -52,4 +45,4 @@ const routes: Routes = [
 	],
 	exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

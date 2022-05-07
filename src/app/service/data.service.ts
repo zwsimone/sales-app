@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { collectionData, docData, Firestore } from '@angular/fire/firestore';
 import { addDoc, collection, deleteDoc, doc, updateDoc } from '@firebase/firestore';
 import { Observable } from 'rxjs';
-import { Sale } from '../pages/view-sales/view-sales.page';
+import { ISale } from '../shared/model/sale';
 
 @Injectable({
   providedIn: 'root'
@@ -11,33 +11,37 @@ export class DataService {
 
   constructor(private firestore: Firestore) { }
 
-  getSales(): Observable<Sale[]> {
+  getSales(): Observable<ISale[]> {
     const salesRef = collection(this.firestore, 'sales');
-    return collectionData(salesRef, { idField: 'id' }) as Observable<Sale[]>;
+    return collectionData(salesRef, { idField: 'id' }) as Observable<ISale[]>;
   }
 
-  getSale(id: string): Observable<Sale> {
+  getSale(id: string): Observable<ISale> {
     const saleDocRef = doc(this.firestore, `sales/${id}`);
-    return docData(saleDocRef, { idField: 'id' }) as Observable<Sale>;
+    return docData(saleDocRef, { idField: 'id' }) as Observable<ISale>;
   }
 
-  addSale(sale: Sale) {
+  addSale(sale: ISale) {
     const salesRef = collection(this.firestore, 'sales');
     return addDoc(salesRef, sale);
   }
 
-  deleteSale(sale: Sale) {
+  deleteSale(sale: ISale) {
     const saleDocRef = doc(this.firestore, `sales/${sale.id}`);
     return deleteDoc(saleDocRef);
   }
 
-  updateSale(sale: Sale) {
+  updateSale(sale: ISale) {
     const saleDocRef = doc(this.firestore, `sales/${sale.id}`);
     return updateDoc(saleDocRef, {
       deliveryFee: sale.deliveryFee,
       invoiceNumber: sale.invoiceNumber,
       mobile: sale.mobile,
       orderTotal: sale.orderTotal,
+      paymentMethod: sale.paymentMethod,
+      paymentTotal: sale.paymentTotal,
+      saleDate: sale.saleDate,
+      serverName: sale.serverName
     });
   }
 }

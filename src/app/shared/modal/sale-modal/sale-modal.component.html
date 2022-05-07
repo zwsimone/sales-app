@@ -1,9 +1,9 @@
 <ion-header>
 	<ion-toolbar>
-		<ion-buttons slot="start">
-			<ion-menu-button></ion-menu-button>
+		<ion-title>Sale Details</ion-title>
+		<ion-buttons slot="end">
+			<ion-button (click)="dismiss()">Close</ion-button>
 		</ion-buttons>
-		<ion-title>Add Sale</ion-title>
 	</ion-toolbar>
 </ion-header>
 
@@ -24,7 +24,8 @@
 		</ion-item>
 		<ion-item *ngIf="formType === 'table'" lines="full">
 			<ion-label position="stacked">Table Number</ion-label>
-			<ion-input type="number" inputmode="numeric" formControlName="tableNumber"></ion-input>
+			<ion-input type="number" inputmode="numeric" formControlName="tableNumber">
+			</ion-input>
 		</ion-item>
 		<ion-item *ngIf="formType === 'delivery'" lines="full">
 			<ion-label position="stacked">Mobile Number</ion-label>
@@ -37,7 +38,9 @@
 		<ion-item lines="full">
 			<ion-label position="stacked">Payment Method</ion-label>
 			<ion-select formControlName="paymentMethod">
-				<ion-select-option *ngFor="let payment of paymentMethods" value="{{payment.value}}">{{ payment.label }}</ion-select-option>
+				<ion-select-option *ngFor="let payment of paymentMethods" value="{{ payment.value }}">{{ payment.label
+					}}
+				</ion-select-option>
 			</ion-select>
 		</ion-item>
 		<ion-item lines="full">
@@ -51,7 +54,7 @@
 		<ion-item lines="full">
 			<ion-label position="stacked">Server</ion-label>
 			<ion-select formControlName="serverName">
-				<ion-select-option *ngFor="let server of servers" value="{{server}}">{{ server }}</ion-select-option>
+				<ion-select-option *ngFor="let server of servers" value="{{ server }}">{{ server }}</ion-select-option>
 			</ion-select>
 		</ion-item>
 		<ion-row>
@@ -61,8 +64,3 @@
 		</ion-row>
 	</form>
 </ion-content>
-
-<!-- <pre>{{ saleForm.value | json }}</pre>
-<pre>{{ saleForm.pristine | json }}</pre>
-<pre>{{ saleForm.errors | json }}</pre>
-<pre>{{ saleForm.valid | json }}</pre> -->

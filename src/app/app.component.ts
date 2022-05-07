@@ -6,11 +6,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 	public appPages = [
-		{ title: 'Add Sales', url: '/add-sale' },
-		{ title: 'View Sales', url: '/view-sales' },
-		{ title: 'Sales Summary', url: '/sales-summary' },
+		{ title: 'Daily Sales', url: '/view-sales' },
+		{ title: 'Daily Summary', url: '/sales-summary' },
 		{ title: 'Sales History', url: '/sales-history' },
 	];
 
-	constructor() {}
+	constructor() { }
 }

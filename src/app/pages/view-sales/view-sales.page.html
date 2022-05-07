@@ -3,11 +3,13 @@
 		<ion-buttons slot="start">
 			<ion-menu-button></ion-menu-button>
 		</ion-buttons>
-		<ion-title>view-sales</ion-title>
+		<ion-title>Daily Sales</ion-title>
 	</ion-toolbar>
 </ion-header>
 
 <ion-content>
+	<h2>Date: {{ date | date: 'YYYY/MM/dd' }}</h2>
+
 	<ion-segment [(ngModel)]="viewType">
 		<ion-segment-button value="all">
 			<ion-label>All</ion-label>
@@ -31,8 +33,8 @@
 						<ion-col class="vertical-text" *ngIf="sale.saleType === 'table'">
 							<b>Table {{sale.tableNumber}} #{{sale.invoiceNumber}}</b>
 						</ion-col>
-						<ion-button type="button" (click)="handleEditButton()" class="edit-icon" fill="clear" color="light">
-							<ion-icon name="ellipsis-vertical"></ion-icon>
+						<ion-button type="button" (click)="handleOptions(sale)" fill="clear" color="light">
+							<ion-icon color="dark" name="ellipsis-vertical"></ion-icon>
 						</ion-button>
 					</ion-row>
 					<ion-row>
@@ -65,4 +67,10 @@
 			</ion-item>
 		</ng-container>
 	</ion-list>
+
+	<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+		<ion-fab-button (click)="addSaleModal()">
+			<ion-icon name="add"></ion-icon>
+		</ion-fab-button>
+	</ion-fab>
 </ion-content>
