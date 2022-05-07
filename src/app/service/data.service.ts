@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { collectionData, docData, Firestore } from '@angular/fire/firestore';
 import { addDoc, collection, deleteDoc, doc, updateDoc } from '@firebase/firestore';
 import { Observable } from 'rxjs';
-import { ISale } from '../shared/model/sale';
+import { ISale, Sale } from '../shared/model/sale';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +11,9 @@ export class DataService {
 
   constructor(private firestore: Firestore) { }
 
-  getSales(): Observable<ISale[]> {
+  getSales(): Observable<Sale[]> {
     const salesRef = collection(this.firestore, 'sales');
-    return collectionData(salesRef, { idField: 'id' }) as Observable<ISale[]>;
+    return collectionData(salesRef, { idField: 'id' }) as Observable<Sale[]>;
   }
 
   getSale(id: string): Observable<ISale> {

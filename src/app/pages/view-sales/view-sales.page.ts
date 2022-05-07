@@ -1,6 +1,6 @@
 import { DataService } from 'src/app/service/data.service';
 import { SaleModalComponent } from 'src/app/shared/modal/sale-modal/sale-modal.component';
-import { ISale } from 'src/app/shared/model/sale';
+import { Sale } from 'src/app/shared/model/sale';
 
 import { Component, OnInit } from '@angular/core';
 import { ActionSheetController, ModalController } from '@ionic/angular';
@@ -13,7 +13,7 @@ import { ActionSheetController, ModalController } from '@ionic/angular';
 export class ViewSalesPage implements OnInit {
 	viewType: string;
 
-	salesList: ISale[];
+	salesList: Sale[];
 
 	modal: HTMLElement;
 
@@ -23,14 +23,11 @@ export class ViewSalesPage implements OnInit {
 		this.viewType = 'all';
 		this.dataService.getSales().subscribe(data => {
 			this.salesList = data;
-			console.log(this.salesList);
 		})
 		this.date = Date.now();
 	}
 
-	ngOnInit() {
-
-	}
+	ngOnInit() { }
 
 	async addSaleModal() {
 		const modal = await this.modalController.create({
@@ -42,7 +39,7 @@ export class ViewSalesPage implements OnInit {
 		await modal.present();
 	}
 
-	async editSaleModal(sale: ISale) {
+	async editSaleModal(sale: Sale) {
 		const modal = await this.modalController.create({
 			component: SaleModalComponent,
 			componentProps: {
@@ -53,7 +50,7 @@ export class ViewSalesPage implements OnInit {
 		modal.present();
 	}
 
-	async handleOptions(sale: ISale) {
+	async handleOptions(sale: Sale) {
 		const actionSheet = await this.actionSheetController.create({
 			header: 'Options',
 			buttons: [
@@ -86,8 +83,5 @@ export class ViewSalesPage implements OnInit {
 			]
 		});
 		await actionSheet.present();
-
-		// const { role, data } = await actionSheet.onDidDismiss();
-		// console.log('onDidDismiss resolved with role and data', role, data);
 	}
 }
