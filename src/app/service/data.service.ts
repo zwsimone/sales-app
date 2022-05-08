@@ -11,7 +11,7 @@ export class DataService {
 
   constructor(private firestore: Firestore) { }
 
-  getSales(): Observable<Sale[]> {
+  getSales(): Observable<Array<Sale>> {
     const salesRef = collection(this.firestore, 'sales');
     return collectionData(salesRef, { idField: 'id' }) as Observable<Sale[]>;
   }

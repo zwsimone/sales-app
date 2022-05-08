@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { SalesSummaryPage } from './pages/sales-summary/sales-summary.page';
+import { ViewSalesPage } from './pages/view-sales/view-sales.page';
 
 const routes: Routes = [
 	{
@@ -14,17 +16,11 @@ const routes: Routes = [
 	},
 	{
 		path: 'view-sales',
-		loadChildren: () =>
-			import('./pages/view-sales/view-sales.module').then(
-				(m) => m.ViewSalesPageModule
-			),
+		component: ViewSalesPage
 	},
 	{
 		path: 'sales-summary',
-		loadChildren: () =>
-			import('./pages/sales-summary/sales-summary.module').then(
-				(m) => m.SalesSummaryPageModule
-			),
+		component: SalesSummaryPage
 	},
 	{
 		path: 'sales-history',
@@ -41,7 +37,7 @@ const routes: Routes = [
 
 @NgModule({
 	imports: [
-		RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
+		RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules, enableTracing: true }),
 	],
 	exports: [RouterModule],
 })

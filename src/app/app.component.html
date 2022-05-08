@@ -1,20 +1,14 @@
 <ion-app>
 	<!-- <ion-split-pane contentId="main-content"> -->
 	<ion-menu contentId="main-content" side="start" type="overlay">
+		<ion-toolbar color="primary">
+			<ion-header>Menu</ion-header>
+		</ion-toolbar>
 		<ion-content>
-			<ion-header>Wok Sales</ion-header>
 			<ion-list id="menu-list">
-				<ion-menu-toggle
-					auto-hide="false"
-					*ngFor="let p of appPages; let i = index"
-				>
-					<ion-item
-						routerDirection="root"
-						[routerLink]="[p.url]"
-						lines="none"
-						detail="false"
-						routerLinkActive="selected"
-					>
+				<ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
+					<ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"
+						routerLinkActive="selected">
 						<ion-label>{{ p.title }}</ion-label>
 					</ion-item>
 				</ion-menu-toggle>

@@ -3,7 +3,7 @@
 		<ion-buttons slot="start">
 			<ion-menu-button></ion-menu-button>
 		</ion-buttons>
-		<ion-title>sales-summary</ion-title>
+		<ion-title>Daily Summary</ion-title>
 	</ion-toolbar>
 </ion-header>
 
@@ -14,74 +14,76 @@
 		</ion-row>
 		<ion-row>
 			<ion-col># Orders</ion-col>
-			<ion-col></ion-col>
+			<ion-col>{{ sales.getTotalNumberOrders() }}</ion-col>
 		</ion-row>
 		<ion-row>
 			<ion-col>Total EFT</ion-col>
-			<ion-col>R</ion-col>
+			<ion-col>R{{ sales.getTotalEFT() }}</ion-col>
 		</ion-row>
 		<ion-row>
 			<ion-col>Total Cash</ion-col>
-			<ion-col>R</ion-col>
+			<ion-col>R{{ sales.getTotalCash() }}</ion-col>
 		</ion-row>
 		<ion-row>
 			<ion-col>Total Credit Card</ion-col>
-			<ion-col>R</ion-col>
+			<ion-col>R{{ sales.getTotalCard() }}</ion-col>
 		</ion-row>
 		<ion-row>
 			<ion-col>Final Total</ion-col>
-			<ion-col>R</ion-col>
+			<ion-col>R{{ sales.getFinalTotal() }}</ion-col>
 		</ion-row>
 		<ion-row>
 			<ion-col>Total Delivery Fees</ion-col>
-			<ion-col>R</ion-col>
+			<ion-col>R{{ sales.getTotalDeliveryFees() }}</ion-col>
 		</ion-row>
 		<ion-row>
 			<ion-col>Total Tips</ion-col>
-			<ion-col>R</ion-col>
+			<ion-col>R{{ sales.getTotalTips() }}</ion-col>
 		</ion-row>
 		<ion-row>
 			<ion-col># Servers</ion-col>
-			<ion-col></ion-col>
+			<ion-col>{{ sales.getServers().length }}</ion-col>
 		</ion-row>
 	</ion-grid>
 
 	<ion-list inset="true">
 		<ion-accordion-group>
-			<ion-accordion value="server">
-				<ion-item slot="header">
-					<ion-label>Carly</ion-label>
-				</ion-item>
+			<ng-container *ngFor="let server of servers">
+				<ion-accordion>
+					<ion-item slot="header">
+						<ion-label>{{ server }}</ion-label>
+					</ion-item>
 
-				<ion-list slot="content">
-					<ion-grid>
-						<ion-row>
-							<ion-col># Orders</ion-col>
-							<ion-col></ion-col>
-						</ion-row>
-						<ion-row>
-							<ion-col>Order Total</ion-col>
-							<ion-col>R</ion-col>
-						</ion-row>
-						<ion-row>
-							<ion-col>Commision</ion-col>
-							<ion-col>R</ion-col>
-						</ion-row>
-						<ion-row>
-							<ion-col>Delivery Fee Total</ion-col>
-							<ion-col>R</ion-col>
-						</ion-row>
-						<ion-row>
-							<ion-col>Tips</ion-col>
-							<ion-col>R</ion-col>
-						</ion-row>
-						<ion-row>
-							<ion-col>Final Total</ion-col>
-							<ion-col>R</ion-col>
-						</ion-row>
-					</ion-grid>
-				</ion-list>
-			</ion-accordion>
+					<ion-list slot="content">
+						<ion-grid>
+							<ion-row>
+								<ion-col># Orders</ion-col>
+								<ion-col>{{ sales.getSalesByServer(server).length }}</ion-col>
+							</ion-row>
+							<ion-row>
+								<ion-col>Order Total</ion-col>
+								<ion-col>R{{ sales.getTotalOrdersByServer(server) }}</ion-col>
+							</ion-row>
+							<ion-row>
+								<ion-col>Commision</ion-col>
+								<ion-col>R{{ sales.getCommissionByServer(server) }}</ion-col>
+							</ion-row>
+							<ion-row>
+								<ion-col>Delivery Fee Total</ion-col>
+								<ion-col>R{{ sales.getTotalDeliveryFeesByServer(server) }}</ion-col>
+							</ion-row>
+							<ion-row>
+								<ion-col>Tips</ion-col>
+								<ion-col>R{{ sales.getTotalTipsByServer(server) }}</ion-col>
+							</ion-row>
+							<ion-row>
+								<ion-col>Final Total</ion-col>
+								<ion-col>R{{ sales.getFinalTotalByServer(server) }}</ion-col>
+							</ion-row>
+						</ion-grid>
+					</ion-list>
+				</ion-accordion>
+			</ng-container>
 		</ion-accordion-group>
 	</ion-list>
 

@@ -10,15 +10,20 @@ import { SharedModule } from './shared/shared.module';
 import { environment } from 'src/environments/environment';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app'
 import { getFirestore, provideFirestore } from '@angular/fire/firestore'
+import { ViewSalesPage } from './pages/view-sales/view-sales.page';
+import { SalesSummaryPage } from './pages/sales-summary/sales-summary.page';
+import { SalesHistoryPage } from './pages/sales-history/sales-history.page';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-	declarations: [AppComponent],
+	declarations: [AppComponent, ViewSalesPage, SalesSummaryPage, SalesHistoryPage],
 	entryComponents: [],
 	imports: [
 		BrowserModule,
 		IonicModule.forRoot(),
 		AppRoutingModule,
 		SharedModule,
+		FormsModule,
 		provideFirebaseApp(() => initializeApp(environment.firebase)),
 		provideFirestore(() => getFirestore())
 	],
