@@ -16,6 +16,7 @@ import { SalesHistoryPage } from "./pages/sales-history/sales-history.page";
 import { FormsModule } from "@angular/forms";
 import { SalesService } from "./service/sales.service";
 import { EmployeesService } from "./service/employees.service";
+import { HistoryService } from "./service/history.service";
 
 @NgModule({
 	declarations: [
@@ -37,6 +38,7 @@ import { EmployeesService } from "./service/employees.service";
 	providers: [
 		SalesService,
 		EmployeesService,
+		HistoryService,
 		{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
 	],
 	bootstrap: [AppComponent],

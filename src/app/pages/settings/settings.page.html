@@ -15,9 +15,9 @@
 				<ion-icon name="chevron-forward-outline"></ion-icon>
 			</ion-buttons>
 		</ion-item>
-		<ion-item
+		<ion-item [disabled]="isLoading"
 			>Reset Daily Sales
-			<ion-buttons slot="end">
+			<ion-buttons slot="end" (click)="resetAlert()">
 				<ion-icon name="chevron-forward-outline"></ion-icon>
 			</ion-buttons>
 		</ion-item>
