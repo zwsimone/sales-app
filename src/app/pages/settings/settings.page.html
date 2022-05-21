@@ -1,9 +1,25 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>settings</ion-title>
-  </ion-toolbar>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-menu-button></ion-menu-button>
+		</ion-buttons>
+		<ion-title>Settings</ion-title>
+	</ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+	<ion-list>
+		<ion-item>
+			Employees
+			<ion-buttons slot="end" (click)="employeeModal()">
+				<ion-icon name="chevron-forward-outline"></ion-icon>
+			</ion-buttons>
+		</ion-item>
+		<ion-item
+			>Reset Daily Sales
+			<ion-buttons slot="end">
+				<ion-icon name="chevron-forward-outline"></ion-icon>
+			</ion-buttons>
+		</ion-item>
+	</ion-list>
 </ion-content>

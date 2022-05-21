@@ -1,0 +1,34 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-title>Employees Details</ion-title>
+		<ion-buttons slot="end">
+			<ion-button (click)="dismiss()">Close</ion-button>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<div *ngIf="isLoading; else serversList" class="ion-text-center">
+		<ion-spinner name="circles"></ion-spinner>
+	</div>
+	<ng-template #serversList>
+		<ion-list>
+			<ng-container *ngFor="let server of servers">
+				<ion-item>
+					{{ server.name }}
+					<ion-buttons slot="end">
+						<ion-button (click)="editEmployeeName(server)">
+							<ion-icon name="pencil"></ion-icon>
+						</ion-button>
+						<ion-button (click)="deleteEmployee(server)">
+							<ion-icon name="trash" color="red"></ion-icon>
+						</ion-button>
+					</ion-buttons>
+				</ion-item>
+			</ng-container>
+		</ion-list>
+		<ion-button expand="block" (click)="addEmployee()">
+			Add Employee
+		</ion-button>
+	</ng-template>
+</ion-content>
