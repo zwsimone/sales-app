@@ -10,6 +10,13 @@ import { Sale } from "../shared/model/sale";
 export class HistoryService {
 	constructor(private firestore: Firestore) {}
 
+	getHistory(): Observable<Sale[]> {
+		const historyRef = collection(this.firestore, "history");
+		return collectionData(historyRef, { idField: "id" }) as Observable<
+			Sale[]
+		>;
+	}
+
 	addHistoryRecord(sale: Sale) {
 		const historyRef = collection(this.firestore, "history");
 		return addDoc(historyRef, sale);

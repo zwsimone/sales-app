@@ -3,61 +3,88 @@
 		<ion-buttons slot="start">
 			<ion-menu-button></ion-menu-button>
 		</ion-buttons>
-		<ion-title>sales-history</ion-title>
+		<ion-title>History</ion-title>
 	</ion-toolbar>
 </ion-header>
 
 <ion-content>
 	<ion-list inset="true">
-		<ion-list-header>
-			<ion-row>
-				<ion-col>Date</ion-col>
-				<ion-col>Invoice Number</ion-col>
-				<ion-col>Order Total</ion-col>
-				<ion-col>Payment Total</ion-col>
-			</ion-row>
-		</ion-list-header>
 		<ion-accordion-group>
-			<ion-accordion value="history">
+			<ion-accordion>
 				<ion-item slot="header">
 					<ion-grid>
 						<ion-row>
-							<ion-col>2022/05/01</ion-col>
-							<ion-col>25</ion-col>
-							<ion-col>450</ion-col>
-							<ion-col>450</ion-col>
+							<ion-col>Date</ion-col>
+							<ion-col>Invoice Number</ion-col>
+							<ion-col>Order Total</ion-col>
+							<ion-col>Payment Total</ion-col>
 						</ion-row>
 					</ion-grid>
 				</ion-item>
-				<ion-list slot="content">
-					<ion-grid>
-						<ion-row>
-							<ion-col>Table Number</ion-col>
-							<ion-col></ion-col>
-						</ion-row>
-						<ion-row>
-							<ion-col>Mobile Number</ion-col>
-							<ion-col>0123465789</ion-col>
-						</ion-row>
-						<ion-row>
-							<ion-col>Payment Method</ion-col>
-							<ion-col>EFT</ion-col>
-						</ion-row>
-						<ion-row>
-							<ion-col>Tips</ion-col>
-							<ion-col>40</ion-col>
-						</ion-row>
-						<ion-row>
-							<ion-col>Delivery Fee</ion-col>
-							<ion-col>0.00</ion-col>
-						</ion-row>
-						<ion-row>
-							<ion-col>Server Name</ion-col>
-							<ion-col>Carly</ion-col>
-						</ion-row>
-					</ion-grid>
-				</ion-list>
 			</ion-accordion>
+			<ng-container *ngFor="let record of history.list">
+				<ion-accordion>
+					<ion-item slot="header">
+						<ion-grid>
+							<ion-row>
+								<ion-col
+									>{{ record.saleDate | date: 'YYYY/mm/dd'
+									}}</ion-col
+								>
+								<ion-col>{{ record.invoiceNumber }}</ion-col>
+								<ion-col
+									>R{{ record.orderTotal | number: '.2'
+									}}</ion-col
+								>
+								<ion-col
+									>R{{ record.paymentTotal | number: '.2'
+									}}</ion-col
+								>
+							</ion-row>
+						</ion-grid>
+					</ion-item>
+					<ion-list slot="content">
+						<ion-grid>
+							<ng-template [ngIf]="record.saleType === 'table'">
+								<ion-row>
+									<ion-col>Table Number</ion-col>
+									<ion-col>{{ record.tableNumber }}</ion-col>
+								</ion-row>
+							</ng-template>
+							<ion-row>
+								<ion-col>Payment Method</ion-col>
+								<ion-col>{{ record.paymentMethod }}</ion-col>
+							</ion-row>
+							<ion-row>
+								<ion-col>Tips</ion-col>
+								<ion-col
+									>R{{ record.paymentTotal - record.orderTotal
+									| number: '.2' }}</ion-col
+								>
+							</ion-row>
+							<ng-template
+								[ngIf]="record.saleType === 'delivery'"
+							>
+								<ion-row>
+									<ion-col>Mobile Number</ion-col>
+									<ion-col>{{ record.mobile }}</ion-col>
+								</ion-row>
+								<ion-row>
+									<ion-col>Delivery Fee</ion-col>
+									<ion-col
+										>R{{ record.deliveryFee | number: '.2'
+										}}</ion-col
+									>
+								</ion-row>
+							</ng-template>
+							<ion-row>
+								<ion-col>Server Name</ion-col>
+								<ion-col>{{ record.serverName }}</ion-col>
+							</ion-row>
+						</ion-grid>
+					</ion-list>
+				</ion-accordion>
+			</ng-container>
 		</ion-accordion-group>
 	</ion-list>
 </ion-content>

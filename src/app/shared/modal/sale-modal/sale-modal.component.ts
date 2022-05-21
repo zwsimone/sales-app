@@ -181,6 +181,7 @@ export class SaleModalComponent implements OnInit, OnDestroy {
 		this.sale.data.paymentTotal = this.paymentTotal.value;
 		this.sale.data.deliveryFee = this.deliveryFee.value;
 		this.sale.data.serverName = this.serverName.value;
+		this.sale.data.tableNumber = this.tableNumber.value;
 
 		if (this.mode === "update") this.dataService.updateSale(this.sale.data);
 		else this.dataService.addSale(this.sale.data);

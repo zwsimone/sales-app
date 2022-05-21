@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { AlertController, ModalController } from "@ionic/angular";
-import { combineLatest, concat, forkJoin, from, tap } from "rxjs";
+import { combineLatest, forkJoin, tap } from "rxjs";
 import { Subscription } from "rxjs/internal/Subscription";
 import { HistoryService } from "src/app/service/history.service";
 import { SalesService } from "src/app/service/sales.service";
