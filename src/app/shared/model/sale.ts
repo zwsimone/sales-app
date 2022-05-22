@@ -144,7 +144,7 @@ export class Sales {
 	getTotalOrdersByServer(name: string): number {
 		let total = 0;
 		this.list.forEach((sale) => {
-			if (sale.serverName === name) total += sale.paymentTotal;
+			if (sale.serverName === name) total += sale.orderTotal;
 		});
 		return this.roundToTwoDecimalPlaces(total);
 	}
@@ -179,7 +179,6 @@ export class Sales {
 
 	getFinalTotalByServer(name: string): number {
 		const final =
-			this.getTotalOrdersByServer(name) +
 			this.getCommissionByServer(name) +
 			this.getTotalDeliveryFeesByServer(name) +
 			this.getTotalTipsByServer(name);

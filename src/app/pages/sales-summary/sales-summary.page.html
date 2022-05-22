@@ -16,27 +16,29 @@
 			</ion-row>
 			<ion-row>
 				<ion-col>Total EFT</ion-col>
-				<ion-col>R{{ sales.getTotalEFT() }}</ion-col>
+				<ion-col>R{{ sales.getTotalEFT() | number: '.2' }}</ion-col>
 			</ion-row>
 			<ion-row>
 				<ion-col>Total Cash</ion-col>
-				<ion-col>R{{ sales.getTotalCash() }}</ion-col>
+				<ion-col>R{{ sales.getTotalCash() | number: '.2' }}</ion-col>
 			</ion-row>
 			<ion-row>
 				<ion-col>Total Credit Card</ion-col>
-				<ion-col>R{{ sales.getTotalCard() }}</ion-col>
+				<ion-col>R{{ sales.getTotalCard() | number: '.2' }}</ion-col>
 			</ion-row>
 			<ion-row>
 				<ion-col>Final Total</ion-col>
-				<ion-col>R{{ sales.getFinalTotal() }}</ion-col>
+				<ion-col>R{{ sales.getFinalTotal() | number: '.2' }}</ion-col>
 			</ion-row>
 			<ion-row>
 				<ion-col>Total Delivery Fees</ion-col>
-				<ion-col>R{{ sales.getTotalDeliveryFees() }}</ion-col>
+				<ion-col
+					>R{{ sales.getTotalDeliveryFees() | number: '.2' }}</ion-col
+				>
 			</ion-row>
 			<ion-row>
 				<ion-col>Total Tips</ion-col>
-				<ion-col>R{{ sales.getTotalTips() }}</ion-col>
+				<ion-col>R{{ sales.getTotalTips() | number: '.2' }}</ion-col>
 			</ion-row>
 			<ion-row>
 				<ion-col># Servers</ion-col>
@@ -65,23 +67,23 @@
 							<ion-row>
 								<ion-col>Order Total</ion-col>
 								<ion-col
-									>R{{ sales.getTotalOrdersByServer(server)
-									}}</ion-col
+									>R{{ sales.getTotalOrdersByServer(server) |
+									number: '.2' }}</ion-col
 								>
 							</ion-row>
-							<ion-row>
-								<ion-col>Commision</ion-col>
+							<ion-row *ngIf="server !== 'Collection'">
+								<ion-col>Commission</ion-col>
 								<ion-col
-									>R{{ sales.getCommissionByServer(server)
-									}}</ion-col
+									>R{{ sales.getCommissionByServer(server) |
+									number: '.2' }}</ion-col
 								>
 							</ion-row>
 							<ion-row>
 								<ion-col>Delivery Fee Total</ion-col>
 								<ion-col
 									>R{{
-									sales.getTotalDeliveryFeesByServer(server)
-									}}</ion-col
+									sales.getTotalDeliveryFeesByServer(server) |
+									number: '.2' }}</ion-col
 								>
 							</ion-row>
 							<ion-row>
