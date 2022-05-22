@@ -8,7 +8,9 @@
 </ion-header>
 
 <ion-content>
-	<h2>Date: {{ date | date:'YYYY/MM/dd' }}</h2>
+	<div class="ion-margin">
+		<h2>Date: {{ date | date:'YYYY/MM/dd' }}</h2>
+	</div>
 
 	<ion-segment [(ngModel)]="viewType">
 		<ion-segment-button value="all">
@@ -27,20 +29,41 @@
 			<ion-item *ngIf="sale.saleType === viewType || viewType === 'all'">
 				<ion-label>
 					<ion-row>
-						<ion-col class="vertical-text" *ngIf="sale.saleType === 'delivery'">
+						<ion-col
+							class="vertical-text"
+							*ngIf="sale.saleType === 'delivery'"
+						>
 							<b>Delivery #{{sale.invoiceNumber}}</b>
 						</ion-col>
-						<ion-col class="vertical-text" *ngIf="sale.saleType === 'table'">
-							<b>Table {{sale.tableNumber}} #{{sale.invoiceNumber}}</b>
+						<ion-col
+							class="vertical-text"
+							*ngIf="sale.saleType === 'table'"
+						>
+							<b
+								>Table {{sale.tableNumber}}
+								#{{sale.invoiceNumber}}</b
+							>
 						</ion-col>
-						<ion-button type="button" (click)="handleOptions(sale)" fill="clear" color="light">
-							<ion-icon color="dark" name="ellipsis-vertical"></ion-icon>
+						<ion-button
+							type="button"
+							(click)="handleOptions(sale)"
+							fill="clear"
+							color="light"
+						>
+							<ion-icon
+								color="dark"
+								name="ellipsis-vertical"
+							></ion-icon>
 						</ion-button>
 					</ion-row>
 					<ion-row>
-						<ion-col>
-							<b>Server: </b>{{sale.serverName}}
-						</ion-col>
+						<ion-col
+							><b>Sale date: </b>{{ sale.saleDate | date:
+							'YYYY/MM/dd' }}</ion-col
+						>
+					</ion-row>
+					<ion-row>
+						<ion-col> <b>Server: </b>{{sale.serverName}} </ion-col>
 					</ion-row>
 					<ion-row>
 						<ion-col *ngIf="sale.saleType === 'delivery'">
