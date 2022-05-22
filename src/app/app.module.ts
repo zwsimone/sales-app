@@ -19,6 +19,7 @@ import { SalesService } from "./service/sales.service";
 import { EmployeesService } from "./service/employees.service";
 import { HistoryService } from "./service/history.service";
 import { LoginPage } from "./pages/login/login.page";
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
 	declarations: [
@@ -39,6 +40,12 @@ import { LoginPage } from "./pages/login/login.page";
 		provideFirebaseApp(() => initializeApp(environment.firebase)),
 		provideFirestore(() => getFirestore()),
 		provideAuth(() => getAuth()),
+  ServiceWorkerModule.register('ngsw-worker.js', {
+    enabled: environment.production,
+    // Register the ServiceWorker as soon as the application is stable
+    // or after 30 seconds (whichever comes first).
+    registrationStrategy: 'registerWhenStable:30000'
+  }),
 	],
 	providers: [
 		SalesService,
