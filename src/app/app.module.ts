@@ -19,7 +19,8 @@ import { SalesService } from "./service/sales.service";
 import { EmployeesService } from "./service/employees.service";
 import { HistoryService } from "./service/history.service";
 import { LoginPage } from "./pages/login/login.page";
-import { ServiceWorkerModule } from '@angular/service-worker';
+import { ServiceWorkerModule } from "@angular/service-worker";
+import { SettingsPage } from "./pages/settings/settings.page";
 
 @NgModule({
 	declarations: [
@@ -28,6 +29,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 		SalesSummaryPage,
 		SalesHistoryPage,
 		LoginPage,
+		SettingsPage,
 	],
 	entryComponents: [],
 	imports: [
@@ -40,12 +42,12 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 		provideFirebaseApp(() => initializeApp(environment.firebase)),
 		provideFirestore(() => getFirestore()),
 		provideAuth(() => getAuth()),
-  ServiceWorkerModule.register('ngsw-worker.js', {
-    enabled: environment.production,
-    // Register the ServiceWorker as soon as the application is stable
-    // or after 30 seconds (whichever comes first).
-    registrationStrategy: 'registerWhenStable:30000'
-  }),
+		ServiceWorkerModule.register("ngsw-worker.js", {
+			enabled: environment.production,
+			// Register the ServiceWorker as soon as the application is stable
+			// or after 30 seconds (whichever comes first).
+			registrationStrategy: "registerWhenStable:30000",
+		}),
 	],
 	providers: [
 		SalesService,
