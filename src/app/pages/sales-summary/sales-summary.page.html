@@ -89,15 +89,15 @@
 							<ion-row>
 								<ion-col>Tips</ion-col>
 								<ion-col
-									>R{{ sales.getTotalTipsByServer(server)
-									}}</ion-col
+									>R{{ sales.getTotalTipsByServer(server) |
+									number: '.2' }}</ion-col
 								>
 							</ion-row>
 							<ion-row>
 								<ion-col>Final Total</ion-col>
 								<ion-col
-									>R{{ sales.getFinalTotalByServer(server)
-									}}</ion-col
+									>R{{ sales.getFinalTotalByServer(server) |
+									number: '.2' }}</ion-col
 								>
 							</ion-row>
 						</ion-grid>
