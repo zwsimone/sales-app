@@ -1,7 +1,9 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { AlertController, ModalController } from "@ionic/angular";
 import { combineLatest, forkJoin, tap } from "rxjs";
 import { Subscription } from "rxjs/internal/Subscription";
+import { AuthService } from "src/app/service/auth.service";
 import { HistoryService } from "src/app/service/history.service";
 import { SalesService } from "src/app/service/sales.service";
 import { EmployeesComponent } from "src/app/shared/modal/employees/employees.component";
@@ -21,7 +23,9 @@ export class SettingsPage implements OnInit, OnDestroy {
 		public modalController: ModalController,
 		private salesService: SalesService,
 		private historyService: HistoryService,
-		public alertController: AlertController
+		public alertController: AlertController,
+		private authService: AuthService,
+		private router: Router
 	) {
 		this.subscriptions = new Array<Subscription>();
 		this.sales = new Sales();
@@ -78,20 +82,6 @@ export class SettingsPage implements OnInit, OnDestroy {
 		const deleteAllSales$ = forkJoin([
 			this.sales.list.map((sale) => this.salesService.deleteSale(sale)),
 		]);
-		// const copyToHistory$ = from(
-		// 	salesList$.forEach((sales) =>
-		// 		sales.forEach((sale) =>
-		// 			this.historyService.addHistoryRecord(sale)
-		// 		)
-		// 	)
-		// ).pipe(concatAll());
-		// const deleteAllSales$ = from(
-		// 	salesList$.forEach((sales) =>
-		// 		sales.forEach((sale) => this.salesService.deleteSale(sale))
-		// 	)
-		// ).pipe(concatAll());
-
-		// const combined$ = concat(salesList$, copyToHistory$, deleteAllSales$);
 
 		this.subscriptions.push(
 			combineLatest([
@@ -103,5 +93,10 @@ export class SettingsPage implements OnInit, OnDestroy {
 				),
 			]).subscribe()
 		);
+	}
+
+	async logout() {
+		await this.authService.logout();
+		this.router.navigateByUrl("/", { replaceUrl: true });
 	}
 }

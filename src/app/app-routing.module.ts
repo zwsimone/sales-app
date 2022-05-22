@@ -4,12 +4,21 @@ import { SalesHistoryPage } from "./pages/sales-history/sales-history.page";
 import { SalesSummaryPage } from "./pages/sales-summary/sales-summary.page";
 import { SettingsPage } from "./pages/settings/settings.page";
 import { ViewSalesPage } from "./pages/view-sales/view-sales.page";
+import {
+	canActivate,
+	redirectLoggedInTo,
+	redirectUnauthorizedTo,
+} from "@angular/fire/auth-guard";
+import { LoginPage } from "./pages/login/login.page";
+
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo([""]);
+const redirectLoggedInToHome = () => redirectLoggedInTo(["view-sales"]);
 
 const routes: Routes = [
 	{
 		path: "",
-		redirectTo: "view-sales",
-		pathMatch: "full",
+		component: LoginPage,
+		...canActivate(redirectLoggedInToHome),
 	},
 	{
 		path: "folder/:id",
@@ -19,18 +28,27 @@ const routes: Routes = [
 	{
 		path: "view-sales",
 		component: ViewSalesPage,
+		...canActivate(redirectUnauthorizedToLogin),
 	},
 	{
 		path: "sales-summary",
 		component: SalesSummaryPage,
+		...canActivate(redirectUnauthorizedToLogin),
 	},
 	{
 		path: "sales-history",
 		component: SalesHistoryPage,
+		...canActivate(redirectUnauthorizedToLogin),
 	},
 	{
 		path: "settings",
 		component: SettingsPage,
+		...canActivate(redirectUnauthorizedToLogin),
+	},
+	{
+		path: "login",
+		component: LoginPage,
+		...canActivate(redirectLoggedInToHome),
 	},
 ];
 

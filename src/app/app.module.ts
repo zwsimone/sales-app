@@ -10,13 +10,15 @@ import { SharedModule } from "./shared/shared.module";
 import { environment } from "src/environments/environment";
 import { provideFirebaseApp, initializeApp } from "@angular/fire/app";
 import { getFirestore, provideFirestore } from "@angular/fire/firestore";
+import { getAuth, provideAuth } from "@angular/fire/auth";
 import { ViewSalesPage } from "./pages/view-sales/view-sales.page";
 import { SalesSummaryPage } from "./pages/sales-summary/sales-summary.page";
 import { SalesHistoryPage } from "./pages/sales-history/sales-history.page";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SalesService } from "./service/sales.service";
 import { EmployeesService } from "./service/employees.service";
 import { HistoryService } from "./service/history.service";
+import { LoginPage } from "./pages/login/login.page";
 
 @NgModule({
 	declarations: [
@@ -24,6 +26,7 @@ import { HistoryService } from "./service/history.service";
 		ViewSalesPage,
 		SalesSummaryPage,
 		SalesHistoryPage,
+		LoginPage,
 	],
 	entryComponents: [],
 	imports: [
@@ -32,8 +35,10 @@ import { HistoryService } from "./service/history.service";
 		AppRoutingModule,
 		SharedModule,
 		FormsModule,
+		ReactiveFormsModule,
 		provideFirebaseApp(() => initializeApp(environment.firebase)),
 		provideFirestore(() => getFirestore()),
+		provideAuth(() => getAuth()),
 	],
 	providers: [
 		SalesService,
