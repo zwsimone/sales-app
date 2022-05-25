@@ -178,11 +178,18 @@ export class Sales {
 	}
 
 	getFinalTotalByServer(name: string): number {
-		const final =
-			this.getCommissionByServer(name) +
-			this.getTotalDeliveryFeesByServer(name) +
-			this.getTotalTipsByServer(name);
-		return this.roundToTwoDecimalPlaces(final);
+		if (name === "Collection")
+			return this.roundToTwoDecimalPlaces(
+				this.getTotalDeliveryFeesByServer(name) +
+					this.getTotalTipsByServer(name)
+			);
+		else {
+			const final =
+				this.getCommissionByServer(name) +
+				this.getTotalDeliveryFeesByServer(name) +
+				this.getTotalTipsByServer(name);
+			return this.roundToTwoDecimalPlaces(final);
+		}
 	}
 
 	getServers(): Array<string> {
