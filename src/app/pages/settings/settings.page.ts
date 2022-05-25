@@ -8,6 +8,7 @@ import { HistoryService } from "src/app/service/history.service";
 import { SalesService } from "src/app/service/sales.service";
 import { EmployeesComponent } from "src/app/shared/modal/employees/employees.component";
 import { Sales } from "src/app/shared/model/sale";
+import { version } from "src/version";
 
 @Component({
 	selector: "app-settings",
@@ -45,6 +46,15 @@ export class SettingsPage implements OnInit, OnDestroy {
 		this.subscriptions.forEach((subscription) =>
 			subscription.unsubscribe()
 		);
+	}
+
+	async aboutInfo() {
+		const aboutAlert = await this.alertController.create({
+			header: "About",
+			message: `Wok Sales App v${version}`,
+			buttons: ["OK"],
+		});
+		await aboutAlert.present();
 	}
 
 	async employeeModal() {

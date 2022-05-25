@@ -1,0 +1,19 @@
+.left .right {
+	width: 50%;
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+.button {
+	width: 100%;
+}
+
+ion-button {
+	--color: --ion-color-dark;
+}
