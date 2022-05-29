@@ -1,6 +1,10 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { AlertController, ModalController } from "@ionic/angular";
+import {
+	AlertController,
+	LoadingController,
+	ModalController,
+} from "@ionic/angular";
 import { combineLatest, forkJoin, tap } from "rxjs";
 import { Subscription } from "rxjs/internal/Subscription";
 import { AuthService } from "src/app/service/auth.service";
@@ -26,7 +30,8 @@ export class SettingsPage implements OnInit, OnDestroy {
 		private historyService: HistoryService,
 		public alertController: AlertController,
 		private authService: AuthService,
-		private router: Router
+		private router: Router,
+		private loadingController: LoadingController
 	) {
 		this.subscriptions = new Array<Subscription>();
 		this.sales = new Sales();
@@ -75,7 +80,24 @@ export class SettingsPage implements OnInit, OnDestroy {
 				},
 				{
 					text: "Confirm",
-					handler: () => this.copySalesToHistory(),
+					handler: async () => {
+						const resetLoading =
+							await this.loadingController.create();
+						await resetLoading.present();
+
+						this.copySalesToHistory();
+
+						await resetLoading.dismiss();
+
+						const completeAlert = await this.alertController.create(
+							{
+								header: "Action Complete",
+								message: "Reset daily sales complete.",
+								buttons: ["OK"],
+							}
+						);
+						await completeAlert.present();
+					},
 				},
 			],
 		});
