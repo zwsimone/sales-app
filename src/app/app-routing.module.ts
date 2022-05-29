@@ -21,11 +21,6 @@ const routes: Routes = [
 		...canActivate(redirectLoggedInToHome),
 	},
 	{
-		path: "folder/:id",
-		loadChildren: () =>
-			import("./folder/folder.module").then((m) => m.FolderPageModule),
-	},
-	{
 		path: "view-sales",
 		component: ViewSalesPage,
 		...canActivate(redirectUnauthorizedToLogin),
