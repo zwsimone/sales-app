@@ -25,7 +25,7 @@ export class ViewSalesPage implements OnInit {
 		public modalController: ModalController
 	) {
 		this.viewType = "all";
-		this.dataService.getSales().subscribe((data) => {
+		this.dataService.getTodaysSales().subscribe((data) => {
 			this.salesList = data;
 		});
 		this.date = Date.now();

@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Subscription } from "rxjs/internal/Subscription";
-import { HistoryService } from "src/app/service/history.service";
+import { SalesService } from "src/app/service/sales.service";
 import { Sales } from "src/app/shared/model/sale";
 
 @Component({
@@ -12,15 +12,15 @@ export class SalesHistoryPage implements OnInit {
 	history: Sales;
 	private subscriptions: Subscription[];
 
-	constructor(private historyService: HistoryService) {
+	constructor(private salesService: SalesService) {
 		this.subscriptions = new Array<Subscription>();
 		this.history = new Sales();
 	}
 
 	ngOnInit() {
 		this.subscriptions.push(
-			this.historyService
-				.getHistory()
+			this.salesService
+				.getAllSales()
 				.subscribe((sales) => (this.history.list = sales))
 		);
 	}

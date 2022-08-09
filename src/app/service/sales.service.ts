@@ -7,7 +7,7 @@ import {
 	doc,
 	updateDoc,
 } from "@firebase/firestore";
-import { Observable } from "rxjs";
+import { map, Observable } from "rxjs";
 import { ISale, Sale } from "../shared/model/sale";
 
 @Injectable({
@@ -16,30 +16,36 @@ import { ISale, Sale } from "../shared/model/sale";
 export class SalesService {
 	constructor(private firestore: Firestore) {}
 
-	getSales(): Observable<Array<Sale>> {
-		const salesRef = collection(this.firestore, "sales");
-		return collectionData(salesRef, { idField: "id" }) as Observable<
-			Sale[]
-		>;
+	getAllSales(): Observable<Array<Sale>> {
+		const salesRef = collection(this.firestore, "history");
+		return collectionData(salesRef, { idField: "id" }).pipe(
+			map((sales: Sale[]) =>
+				sales.sort((sale1, sale2) => {
+					if (sale1.saleDate > sale2.saleDate) return -1;
+					if (sale1.saleDate < sale2.saleDate) return 1;
+					return 0;
+				})
+			)
+		) as Observable<Sale[]>;
 	}
 
 	getSale(id: string): Observable<ISale> {
-		const saleDocRef = doc(this.firestore, `sales/${id}`);
+		const saleDocRef = doc(this.firestore, `history/${id}`);
 		return docData(saleDocRef, { idField: "id" }) as Observable<ISale>;
 	}
 
 	addSale(sale: ISale) {
-		const salesRef = collection(this.firestore, "sales");
+		const salesRef = collection(this.firestore, "history");
 		return addDoc(salesRef, sale);
 	}
 
 	deleteSale(sale: ISale) {
-		const saleDocRef = doc(this.firestore, `sales/${sale.id}`);
+		const saleDocRef = doc(this.firestore, `history/${sale.id}`);
 		return deleteDoc(saleDocRef);
 	}
 
 	updateSale(sale: ISale) {
-		const saleDocRef = doc(this.firestore, `sales/${sale.id}`);
+		const saleDocRef = doc(this.firestore, `history/${sale.id}`);
 		return updateDoc(saleDocRef, {
 			deliveryFee: sale.deliveryFee,
 			invoiceNumber: sale.invoiceNumber,
@@ -50,5 +56,46 @@ export class SalesService {
 			saleDate: sale.saleDate,
 			serverName: sale.serverName,
 		});
+	}
+
+	deleteAllRecords() {
+		const historyRef = collection(this.firestore, "history");
+		const snapshot = collectionData(historyRef, {
+			idField: "id",
+		}) as Observable<ISale[]>;
+		snapshot.forEach((records) => {
+			records.forEach((record) => {
+				const recordRef = doc(this.firestore, `history/${record.id}`);
+				deleteDoc(recordRef);
+			});
+		});
+	}
+
+	getTodaysSales() {
+		const salesRef = collection(this.firestore, "history");
+		return (
+			collectionData(salesRef, { idField: "id" }) as Observable<Sale[]>
+		).pipe(
+			map((sales: Sale[]) =>
+				sales.filter((sale: Sale) => {
+					const saleDate = new Date(sale.saleDate);
+					const currentDate = new Date();
+
+					if (
+						saleDate.getMonth() === currentDate.getMonth() &&
+						saleDate.getDate() === currentDate.getDate()
+					)
+						return true;
+					else return false;
+				})
+			),
+			map((sales: Sale[]) =>
+				sales.sort((sale1, sale2) => {
+					if (sale1.invoiceNumber > sale2.invoiceNumber) return -1;
+					if (sale1.invoiceNumber < sale2.invoiceNumber) return 1;
+					return 0;
+				})
+			)
+		);
 	}
 }

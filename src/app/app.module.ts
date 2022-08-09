@@ -17,7 +17,6 @@ import { SalesHistoryPage } from "./pages/sales-history/sales-history.page";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SalesService } from "./service/sales.service";
 import { EmployeesService } from "./service/employees.service";
-import { HistoryService } from "./service/history.service";
 import { LoginPage } from "./pages/login/login.page";
 import { ServiceWorkerModule } from "@angular/service-worker";
 import { SettingsPage } from "./pages/settings/settings.page";
@@ -52,7 +51,6 @@ import { SettingsPage } from "./pages/settings/settings.page";
 	providers: [
 		SalesService,
 		EmployeesService,
-		HistoryService,
 		{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
 	],
 	bootstrap: [AppComponent],

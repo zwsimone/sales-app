@@ -17,7 +17,7 @@ export class SalesSummaryPage implements OnInit {
 	}
 
 	ngOnInit() {
-		this.dataService.getSales().subscribe((data) => {
+		this.dataService.getTodaysSales().subscribe((data) => {
 			this.sales.list = data;
 			this.servers = this.sales.getServers();
 		});
