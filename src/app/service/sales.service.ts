@@ -83,7 +83,8 @@ export class SalesService {
 
 					if (
 						saleDate.getMonth() === currentDate.getMonth() &&
-						saleDate.getDate() === currentDate.getDate()
+						saleDate.getDate() === currentDate.getDate() &&
+						saleDate.getFullYear() === currentDate.getFullYear()
 					)
 						return true;
 					else return false;
