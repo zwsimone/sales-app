@@ -29,6 +29,22 @@ export class SalesService {
 		) as Observable<Sale[]>;
 	}
 
+	getTop100Sales(): Observable<Array<Sale>> {
+		const salesRef = collection(this.firestore, "history");
+		return collectionData(salesRef, { idField: "id" }).pipe(
+			map((sales: Sale[]) =>
+				{
+					const result = sales.sort((sale1, sale2) => {
+						if (sale1.saleDate > sale2.saleDate) return -1;
+						if (sale1.saleDate < sale2.saleDate) return 1;
+						return 0;
+					});
+					return result.slice(0, 100)
+				}
+			)
+		) as Observable<Sale[]>;
+	}
+
 	getSale(id: string): Observable<ISale> {
 		const saleDocRef = doc(this.firestore, `history/${id}`);
 		return docData(saleDocRef, { idField: "id" }) as Observable<ISale>;

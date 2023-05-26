@@ -20,7 +20,7 @@ export class SalesHistoryPage implements OnInit {
 	ngOnInit() {
 		this.subscriptions.push(
 			this.salesService
-				.getAllSales()
+				.getTop100Sales()
 				.subscribe((sales) => (this.history.list = sales))
 		);
 	}
